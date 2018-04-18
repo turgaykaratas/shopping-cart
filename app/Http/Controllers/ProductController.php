@@ -13,6 +13,7 @@ class ProductController extends Controller
     public function getIndex()
     {
         $products = Product::all();
+        $a = 'hello';
 
         return view('shop.index', ['products' => $products]);
     }
