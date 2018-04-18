@@ -13,7 +13,7 @@ class Cart
         if ($oldCart) {
             $this->items = $oldCart->items;
             $this->totalQty = $oldCart->totalQty;
-            $this->totalPrice = $oldCart->totalPrice;
+            $this->totalPrice = $oldCart->totalPrice;;
         }
     }
 
