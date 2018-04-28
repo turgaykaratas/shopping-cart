@@ -3,23 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Product;
 use App\Cart;
 use Session;
-
+use App\Contracts\IProductService;
 
 class ProductController extends Controller
 {
+    private $productService;
+ 
+    public function __construct(IProductService $productService) {
+ 
+        $this->productService = $productService;
+    }
+
     public function getIndex()
     {
-        $products = Product::all();
+        $products = $this->productService->getAll();
 
         return view('shop.index', ['products' => $products]);
     }
 
-    public function getAddToCart(Request $request, $id)
+    public function getRepo()
+    { 
+        $product = $this->productService->getById(3);
+
+        dd($product);
+    }
+
+
+    public function getAddToCart(Request $request,int $id)
     {
-        $product = Product::find($id);
+        $product = $this->productService->getById($id);
+        
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
 
         $cart = new Cart($oldCart);
@@ -49,7 +64,7 @@ class ProductController extends Controller
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $total = $cart->totalPrice;
-        
+
         return view('shop.checkout', ['total' => $total]);
     }
 }
