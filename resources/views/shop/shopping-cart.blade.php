@@ -5,11 +5,12 @@
 @endsection
 
 @section('content')
-    @if (Session::has('cart'))
+    @if ($cart->items)
         <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
                 <ul class="list-group">
-                    @foreach($products as $product)
+
+                    @foreach($cart->items as $product)
                         <li class="list-group-item">
                             <span class="badge">{{ $product['qty'] }}</span>
                             <strong>{{ $product['item']['title'] }}</strong>
@@ -30,7 +31,7 @@
         </div>
         <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-              <strong>Total ${{ $totalPrice }}</strong>  
+              <strong>Total ${{ $cart->totalPrice }}</strong>  
             </div>
         </div>
         <hr>

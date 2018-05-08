@@ -17,11 +17,6 @@ Route::get('/', [
 ]);
 
 
-
-Route::get('/repo', 'ProductController@getRepo');
-
-
-
 Route::get('/add-to-cart/{id}', 'ProductController@getAddToCart')->name('product.addToCart');
 
 Route::get('/shopping-cart', 'ProductController@getCart')->name('product.shoppingCart');
